@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
     bcrypt = require('bcrypt'),
     SALT_WORK_FACTOR = 10;
 
-mongoose.connect('mongodb+srv://admin:Inbar5594@cluster0.yqhob.mongodb.net/Calendar?retryWrites=true&w=majority', {
+mongoose.connect("mongodb+srv://admin:12345@cluster0.yqhob.mongodb.net/Calendar?retryWrites=true&w=majority", {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useFindAndModify: false 
@@ -19,20 +19,16 @@ mongoose.set('useCreateIndex', true);
 const UserSchema = new Schema({
     fname: {
         type: String,
-        // required: true
     },
     lname:{
         type: String,
-        // required: true
     },
     email: {
         type: String,
-        // required: true,
         index: { unique: true }
     },
     password: {
         type: String,
-        // required: true
     }
 })
 
@@ -55,13 +51,6 @@ UserSchema.pre('save', function(next) {
         });
     });
 });
-
-UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
-    });
-};
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User ;
