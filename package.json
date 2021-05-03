@@ -8,7 +8,7 @@
     "start": "nodemon server.js",
     "server": "nodemon server.js",
     "client": "cd Calendar-react-app && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "heroku-postbuild": "npm run server && npm run client"
   },
   "engines": {
     "node": "12.14.1"
