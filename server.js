@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const port = 8081
+// const port = 8081
+let port = process.env.PORT;
 const cors = require('cors');
 var bodyParser = require('body-parser')
 app.use(express.json());
@@ -46,6 +47,11 @@ app.post('/login', (req, res) => {
 })
 
 app.set('port', process.env.PORT || port);
+
+
+if (port == null || port == "") {
+  port = 8081;
+}
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
