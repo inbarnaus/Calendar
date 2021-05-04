@@ -9,9 +9,6 @@
     "server": "nodemon server.js",
     "client": "cd ../Calendar-react-app && npm start"
   },
-  "engines": {
-    "node": "12.14.1"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
