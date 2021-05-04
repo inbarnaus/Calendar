@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "server": "nodemon server.js",
-    "client": "cd ../Calendar-react-app && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client": "cd ../Calendar-react-app && npm start"
   },
   "engines": {
     "node": "12.14.1"
