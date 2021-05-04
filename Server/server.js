@@ -53,6 +53,6 @@ app.set('port', process.env.PORT || port);
 if (port == null || port == "") {
   port = 8081;
 }
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
