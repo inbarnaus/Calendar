@@ -5,6 +5,7 @@ let port = process.env.PORT;
 const cors = require('cors');
 var bodyParser = require('body-parser')
 app.use(express.json());
+app.use(express.static("public"))
 var User = require('./mongoose')
 var bcrypt = require('bcrypt')
 
