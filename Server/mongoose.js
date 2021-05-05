@@ -8,9 +8,6 @@ mongoose.connect("mongodb+srv://admin:12345@cluster0.yqhob.mongodb.net/Calendar?
     useUnifiedTopology: true,
     useFindAndModify: false 
 })
-.then(async ()=>{
-    console.log("db is connected"); 
-})
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
