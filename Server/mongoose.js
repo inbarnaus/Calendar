@@ -6,12 +6,13 @@ var mongoose = require('mongoose'),
 mongoose.connect("mongodb+srv://admin:12345@cluster0.yqhob.mongodb.net/Calendar?retryWrites=true&w=majority", {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
-    useFindAndModify: false 
+    useFindAndModify: false,
+    useCreateIndex: true
 })
 
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
+// mongoose.set('useNewUrlParser', true);
+// mongoose.set('useFindAndModify', false);
+// mongoose.set('useCreateIndex', true);
 
 const UserSchema = new Schema({
     fname: {
@@ -26,7 +27,16 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
+    },
+    events: {
+        type: Array
     }
+})
+
+const EventSchema = new Schema({
+    info: String,
+    start: String,
+    end: String
 })
 
 UserSchema.pre('save', function(next) {
@@ -50,4 +60,8 @@ UserSchema.pre('save', function(next) {
 });
 
 const User = mongoose.model('User', UserSchema);
-module.exports = User ;
+const Event = mongoose.model('Event', EventSchema)
+module.exports = {
+    User: User, 
+    Event: Event
+} ;

@@ -6,7 +6,8 @@ const cors = require('cors');
 var bodyParser = require('body-parser')
 app.use(express.json());
 app.use(express.static("public"))
-var User = require('./mongoose')
+var {User} = require('./mongoose')
+var {Event} = require('./mongoose')
 var bcrypt = require('bcrypt')
 
 app.use(cors());
@@ -21,7 +22,8 @@ app.post('/signup', (req, res) => {
       fname: req.body.firstName, 
       lname: req.body.lastName, 
       email: req.body.email, 
-      password: req.body.password
+      password: req.body.password,
+      events: []
     });
     User.find({email: req.body.email}, (err, obj)=>{
       if(obj.length == 0)
@@ -41,8 +43,26 @@ app.post('/login', (req, res) => {
     User.find({email: req.body.email}, (err, obj)=>{
       if(obj.length != 0)
         bcrypt.compare(req.body.password, obj[0].password, (err, isMatch) => {
-          res.send({succeded: isMatch})
+          if(isMatch)
+            res.send({succeded: isMatch, events: obj[0].events})
+          else
+            res.send({succeded: isMatch})
         });
+    })
+  }
+})
+
+app.post('/addEvent', (req, res) => {
+  var user = req.body.user
+  if(user !== '' && req.body.title !== ''){
+      delete req.body.user
+      req.body.end = req.body.start
+    User.updateOne({email: user}, { $push: { events: [req.body] } },
+    function(err, result) {
+      if (err)
+        res.send(err);
+      else 
+        res.send(result);
     })
   }
 })
